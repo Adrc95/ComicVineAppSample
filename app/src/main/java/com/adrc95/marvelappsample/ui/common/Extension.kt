@@ -3,18 +3,13 @@ package com.adrc95.marvelappsample.ui.common
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.forEach
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -52,7 +47,7 @@ fun View.setVisible(visible: Boolean) {
 
 fun View.isVisible() = visibility == View.VISIBLE
 
-inline fun <T> basicDiffUtil(
+inline fun <T : Any> basicDiffUtil(
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
     crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
 ) = object : DiffUtil.ItemCallback<T>() {
@@ -77,13 +72,6 @@ fun RecyclerView.setDivider(@DrawableRes drawableRes: Int) {
         addItemDecoration(divider)
     }
 }
-
-fun Menu.tint(@ColorInt color: Int = Color.WHITE) {
-    forEach { it.icon.setTint(color) }
-}
-
-val Menu.items: List<MenuItem>
-    get() = (0 until size()).map { getItem(it) }
 
 fun <T> LifecycleOwner.launchAndCollect(
     flow: Flow<T>,

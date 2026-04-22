@@ -1,12 +1,8 @@
 package com.adrc95.marvelappsample.data.database
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.IgnoredOnParcel
-import kotlinx.parcelize.Parcelize
 
 object Character {
     const val TABLE_NAME = "characters"
@@ -18,7 +14,6 @@ object Character {
     const val COLUMN_FAVORITE = "favorite"
 }
 
-@Parcelize
 @Entity(tableName = Character.TABLE_NAME)
 data class CharacterEntity(
     @PrimaryKey(autoGenerate = true)
@@ -28,4 +23,4 @@ data class CharacterEntity(
     @ColumnInfo(name = Character.COLUMN_URI) val uri: String,
     @ColumnInfo(name = Character.COLUMN_THUMBNAIL) val thumbnail: String,
     @ColumnInfo(name = Character.COLUMN_FAVORITE) val favorite: Boolean?
-) : Parcelable
+)

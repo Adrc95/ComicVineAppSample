@@ -2,7 +2,6 @@ package com.adrc95.marvelappsample.ui.detail
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.adrc95.marvelappsample.BR
 
 class FavoriteMenuObservable : BaseObservable() {
 
@@ -11,7 +10,7 @@ class FavoriteMenuObservable : BaseObservable() {
         get() = field
         set(value) {
             field = value
-            notifyPropertyChanged(BR.favorite)
+            notifyChange()
         }
 
     @Bindable
@@ -19,6 +18,6 @@ class FavoriteMenuObservable : BaseObservable() {
         get() = field
         set(value) {
             field = value
-            notifyPropertyChanged(BR.enabled)
+            notifyChange()
         }
 }

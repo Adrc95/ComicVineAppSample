@@ -8,40 +8,22 @@ import com.adrc95.marvelappsample.ui.favorite.FavoriteCharactersAdapter
 
 @BindingAdapter(value = ["items", "isMoreItemsLoad"], requireAll = false)
 fun RecyclerView.setItems(characters: List<Character>?, isMoreItemLoad: Boolean?) {
-
-    adapter?.let {
-        when (it) {
-            is CharactersAdapter -> {
-                val adapter = it
-                characters?.let {
-                    if (!adapter.isApplicatedFilter) {
-                        when {
-                            adapter.characters.isNullOrEmpty() -> {
-                                adapter.characters = characters
-                                adapter.submitList(adapter.characters)
-                            }
-                            isMoreItemLoad == true -> {
-                                adapter.characters = adapter.characters!! + characters
-                                adapter.submitList(adapter.characters)
-                            }
-                            else -> {
-                                //Nothing
-                            }
-                        }
-                    }
-                    adapter.isApplicatedFilter = false
+    val items = characters ?: return
+    when (val currentAdapter = adapter) {
+        is CharactersAdapter -> {
+            if (!currentAdapter.isApplicatedFilter) {
+                if (currentAdapter.characters.isNullOrEmpty()) {
+                    currentAdapter.characters = items
+                    currentAdapter.submitList(currentAdapter.characters)
+                } else if (isMoreItemLoad == true) {
+                    currentAdapter.characters = currentAdapter.characters!! + items
+                    currentAdapter.submitList(currentAdapter.characters)
                 }
             }
-            is FavoriteCharactersAdapter -> {
-                val adapter = it
-                characters?.let {
-                    adapter.submitList(characters)
-                }
-            }
-            else -> {
-                //Nothing
-            }
+            currentAdapter.isApplicatedFilter = false
         }
+        is FavoriteCharactersAdapter -> currentAdapter.submitList(items)
+        else -> Unit
     }
 }
 
@@ -63,8 +45,7 @@ fun RecyclerView.onMoreItems(onLoadMoreListener: OnLoadMoreListener?) {
         addOnScrolledToEnd { totalItemCount ->
             if (!it.isApplicatedFilter) {
                 adapter.isLoadMoreCharacters = true
-                //In progress
-                //onLoadMoreListener?.onLoadMore(totalItemCount)
+                onLoadMoreListener?.onLoadMore(totalItemCount)
             }
         }
     }

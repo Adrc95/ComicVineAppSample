@@ -39,6 +39,7 @@ private val favoriteCharacters: FavoriteCharacter): ViewModel() {
             loading = false) }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onGetFavoriteCharactersError(failure: Failure) {
         _uiState.update { FavoriteUiState(serverError = true ,loading = false) }
     }
@@ -49,10 +50,12 @@ private val favoriteCharacters: FavoriteCharacter): ViewModel() {
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onFavoriteSuccess(unit :Unit) {
         getFavoriteCharacters()
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onFavoriteError(failure: Failure) {
         TODO()
     }

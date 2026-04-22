@@ -1,6 +1,6 @@
 package com.adrc95.marvelappsample.data.server
 
-import com.adrc95.marvelappsample.data.util.Utils.Companion.md5
+import com.adrc95.marvelappsample.data.util.Utils
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -35,6 +35,6 @@ class MarvelKeyInterceptor(private val publicKey: String, private val privateKey
      */
     private fun generateMarvelHash(timeStamp: Long, privateKey: String, publicKey: String): String {
         val marvelHash = timeStamp.toString() + privateKey + publicKey
-        return md5(marvelHash)
+        return Utils.md5(marvelHash)
     }
 }

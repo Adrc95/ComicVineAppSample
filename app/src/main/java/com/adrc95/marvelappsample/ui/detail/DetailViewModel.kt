@@ -29,7 +29,7 @@ class DetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle,
 
     private fun getCharacter(id : Long) {
         getCharacter(GetCharacter.Params(id),viewModelScope) {
-            it.fold(::onCharacterSuccess,::onCharacterSuccess)
+            it.fold(::onCharacterError,::onCharacterSuccess)
         }
     }
 
@@ -37,9 +37,8 @@ class DetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle,
         _uiState.update { DetailUiState(loading = false, character = character) }
     }
 
-    private fun onCharacterSuccess(failure: Failure) {
-
-    }
+    @Suppress("UNUSED_PARAMETER")
+    private fun onCharacterError(failure: Failure) = Unit
 
     fun onFavoriteActionClicked() {
         val character = uiState.value.character
@@ -50,13 +49,13 @@ class DetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle,
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onFavoriteSuccess(unit: Unit) {
         getCharacter(args.id)
     }
 
-    private fun onFavoriteError(failure: Failure) {
-
-    }
+    @Suppress("UNUSED_PARAMETER")
+    private fun onFavoriteError(failure: Failure) = Unit
 
     data class DetailUiState(
         val loading : Boolean = true,

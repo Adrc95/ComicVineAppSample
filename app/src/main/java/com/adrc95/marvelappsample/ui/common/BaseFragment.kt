@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.adrc95.marvelappsample.BR
 
 abstract class BaseFragment<VBinding : ViewDataBinding> : Fragment() {
 

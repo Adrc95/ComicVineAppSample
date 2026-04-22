@@ -32,6 +32,7 @@ class MainViewModel @Inject constructor(private val getCharacters: GetCharacters
         getCharacters(count)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onCharactersError(error: Failure) {
         _uiState.update { MainUiState(loading = false, serverError = true) }
     }

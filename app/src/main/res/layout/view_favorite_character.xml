@@ -82,7 +82,7 @@
                 android:minLines="2"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:text="@{!character.description.isEmpty() ? character.description : @string/empty_description }"
+                android:text="@{character != null &amp;&amp; !character.description.isEmpty() ? character.description : @string/empty_description}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintBottom_toBottomOf="@+id/civCharacter"
                 app:layout_constraintEnd_toEndOf="parent"

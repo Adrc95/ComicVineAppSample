@@ -44,16 +44,17 @@ open class APIService<T> constructor(
     }
 
     suspend fun <R> execute(apiCall: suspend () -> R): Either<Failure, R> =
-        try {
-            Either.Right(apiCall.invoke())
-        } catch (throwable: Throwable) {
-            manageAPIError(throwable)
-        }
+        Either.catch {
+            apiCall.invoke()
+        }.fold(
+            ifLeft = { Either.Left(toFailure(it)) },
+            ifRight = { Either.Right(it) }
+        )
 
-    private fun <R> manageAPIError(throwable: Throwable): Either<Failure, R> =
+    private fun toFailure(throwable: Throwable): Failure =
         when (throwable) {
-            is IOException -> Either.Left(Failure.NetworkConnection)
-            is HttpException -> Either.Left(Failure.ServerError)
-            else -> Either.Left(Failure.UnknownRemoteError)
+            is IOException -> Failure.NetworkConnection
+            is HttpException -> Failure.ServerError
+            else -> Failure.UnknownRemoteError
         }
 }
