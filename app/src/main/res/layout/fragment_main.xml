@@ -10,7 +10,7 @@
 
         <import type="kotlin.Unit" />
 
-        <import type="com.adrc95.marvelappsample.R" />
+        <import type="com.adrc95.comicvineappsample.R" />
 
         <import type="java.util.List" />
 
@@ -31,8 +31,16 @@
             type="String" />
 
         <variable
+            name="pagingLoading"
+            type="boolean" />
+
+        <variable
+            name="emptySearchResults"
+            type="boolean" />
+
+        <variable
             name="characters"
-            type="List&lt;com.adrc95.domain.Character>" />
+            type="List&lt;com.adrc95.comicvineappsample.ui.model.CharacterDisplayModel>" />
 
         <variable
             name="tryAgain"
@@ -41,6 +49,10 @@
         <variable
             name="onSearchTextChanged"
             type="Function1&lt;CharSequence, Unit>" />
+
+        <variable
+            name="onMoreItems"
+            type="com.adrc95.comicvineappsample.ui.main.adapter.OnLoadMoreListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,17 +114,31 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
+            android:paddingBottom="56dp"
             android:overScrollMode="never"
             app:customDivider="@{R.drawable.divider}"
-            app:filter="@{filterQuery}"
             app:items="@{characters}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilSearch"
+            app:onMoreItems="@{onMoreItems}"
             tools:itemCount="10"
             tools:listitem="@layout/view_character" />
+
+        <ProgressBar
+            android:id="@+id/pagingProgressBar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="12dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visible="@{pagingLoading}" />
 
         <include
             layout="@layout/view_error"
@@ -123,5 +149,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            layout="@layout/view_empty_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:show="@{emptySearchResults}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSearch" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.adrc95.marvelappsample.ui.detail.FavoriteMenuObservable"
+            type="com.adrc95.comicvineappsample.ui.detail.FavoriteMenuObservable"
             />
 
         <variable

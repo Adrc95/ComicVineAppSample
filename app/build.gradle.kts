@@ -16,7 +16,7 @@ plugins {
 }
 
 android {
-    namespace = "com.adrc95.marvelappsample"
+    namespace = "com.adrc95.comicvineappsample"
     compileSdk {
         version = release(37)
     }
@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.maisters.marvelappsample"
+        applicationId = "com.adrc95.comicvineappsample"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
@@ -34,13 +34,8 @@ android {
 
         buildConfigField(
             "String",
-            "PUBLIC_KEY",
-            properties.stringLiteral("PUBLIC_KEY")
-        )
-        buildConfigField(
-            "String",
-            "PRIVATE_KEY",
-            properties.stringLiteral("PRIVATE_KEY")
+            "COMIC_VINE_API_KEY",
+            properties.stringLiteral("COMIC_VINE_API_KEY")
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -73,6 +68,7 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.constraintlayout)
@@ -90,15 +86,16 @@ dependencies {
     ksp(libs.google.hilt.compiler)
     implementation(libs.arrow.core)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.datastore.preferences)
     ksp(libs.androidx.room.compiler)
     implementation(libs.hdodenhof.circleimageview)
     implementation(libs.airbnb.lottie)
     implementation(libs.apachat.swipereveallayout)
     implementation(libs.bumptech.glide)
     ksp(libs.bumptech.glide.compiler)
+    implementation(libs.touchlab.kermit)
     implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":usecases"))
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)

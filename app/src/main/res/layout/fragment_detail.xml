@@ -9,7 +9,7 @@
             type="boolean" />
         <variable
             name="character"
-            type="com.adrc95.domain.Character" />
+            type="com.adrc95.comicvineappsample.ui.model.CharacterDisplayModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -51,7 +51,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{character != null &amp;&amp; !character.description.isEmpty() ? character.description : @string/empty_description}"
+                android:text="@{character != null &amp;&amp; character.longDescription != null &amp;&amp; !character.longDescription.isEmpty() ? character.longDescription : (character != null &amp;&amp; !character.shortDescription.isEmpty() ? character.shortDescription : @string/empty_description)}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

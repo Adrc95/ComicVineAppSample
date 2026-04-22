@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="com.adrc95.marvelappsample.ui.navhost.NavHostMenuObservable" />
+            type="com.adrc95.comicvineappsample.ui.navhost.NavHostMenuObservable" />
 
         <variable
             name="onChangeTheme"

@@ -30,7 +30,7 @@
             android:layout_marginBottom="?attr/actionBarSize"
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:navGraph="@navigation/marvel_app_graph" />
+            app:navGraph="@navigation/comic_vine_app_graph" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"

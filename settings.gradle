@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "MarvelAppSample"
-include ':app',':usecases',':domain',':data'
+rootProject.name = "ComicVineAppSample"
+include ':app',':domain',':data'

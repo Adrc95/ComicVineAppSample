@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">MarvelAppSample</string>
+    <string name="app_name">ComicVineAppSample</string>
     <string name="empty_description">No description available</string>
     <string name="characters">Characters</string>
     <string name="favorites">Favorites</string>
     <string name="favorite">Favorite</string>
     <string name="dark_mode">Light/Dark</string>
     <string name="hint_search">Type your character name here</string>
+    <string name="empty_favorite_characters">No favorite characters yet</string>
+    <string name="empty_search_results">No characters found for this search</string>
     <string name="empty"/>
 </resources>
