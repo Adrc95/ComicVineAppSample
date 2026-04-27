@@ -4,6 +4,6 @@ plugins {
 
 dependencies {
     implementation(libs.arrow.core)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.inject.javax.inject)
 }

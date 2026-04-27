@@ -16,9 +16,9 @@ interface LocalCharactersDataSource {
 
     suspend fun countCharacters(): Either<Failure, Int>
 
-    suspend fun saveCharacter(character: Character) : Either<Failure, Unit>
+    suspend fun saveCharacter(character: Character): Either<Failure, Unit>
 
-    suspend fun saveCharacters(characters: List<Character>) : Either<Failure, Unit>
+    suspend fun saveCharacters(characters: List<Character>): Either<Failure, Unit>
 
-    suspend fun updateFavoriteCharacter(id: Long, favorite: Boolean) : Either<Failure, Unit>
+    suspend fun updateFavoriteCharacter(id: Long, favorite: Boolean): Either<Failure, Unit>
 }

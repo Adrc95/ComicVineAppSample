@@ -1,13 +1,12 @@
 package com.adrc95.comicvineappsample.ui.navhost
 
 import android.app.Activity
-import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.adrc95.comicvineappsample.ui.common.ModeTypeDisplayModel
 
-fun Activity.buildNavHostState(context: Context = this) = NavHostState(context)
+fun Activity.buildNavHostState() = NavHostState()
 
-class NavHostState(private val context: Context) {
+class NavHostState {
 
     fun onChangeTheme(mode : ModeTypeDisplayModel) {
         when (mode) {

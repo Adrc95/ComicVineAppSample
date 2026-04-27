@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.adrc95.data"
+    namespace = "com.adrc95.core.datastore"
     compileSdk {
         version = release(37)
     }
@@ -21,9 +21,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.arrow.core)
+    implementation(libs.androidx.datastore.preferences)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.google.hilt.android)
     ksp(libs.google.hilt.compiler)
+    implementation(project(":data"))
     implementation(project(":domain"))
 }

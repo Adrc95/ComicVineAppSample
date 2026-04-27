@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.adrc95.data"
+    namespace = "com.adrc95.core.database"
     compileSdk {
         version = release(37)
     }
@@ -21,9 +21,12 @@ android {
 }
 
 dependencies {
-    implementation(libs.arrow.core)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.kotlinx.coroutines.core)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.google.hilt.android)
     ksp(libs.google.hilt.compiler)
+    implementation(libs.arrow.core)
+    implementation(project(":data"))
     implementation(project(":domain"))
 }

@@ -15,7 +15,6 @@ okhttp = "5.3.2"
 coroutines = "1.10.2"
 lifecycle = "2.10.0"
 serialization = "1.11.0"
-retrofit-serialization-converter = "1.0.0"
 arrow = "2.2.2.1"
 room = "2.8.4"
 datastore = "1.1.7"
@@ -45,7 +44,7 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
-jakewharton-retrofit-kotlinx-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization-converter" }
+squareup-retrofit-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
 google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }

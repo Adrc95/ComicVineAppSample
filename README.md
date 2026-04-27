@@ -24,7 +24,7 @@ The codebase is organized as a multi-module project and follows a clean separati
 
 ## Overview
 
-This app fetches Comic Vine characters from the network, persists them locally with Room, and exposes them to the UI using Kotlin Flow.
+This app fetches Comic Vine characters from the network, persists them locally with Room, stores UI configuration with DataStore, and exposes everything to the UI using Kotlin Flow.
 
 The current implementation uses an offline-first approach for the main flows:
 - the UI observes Room as the source of truth
@@ -56,8 +56,9 @@ At a high level:
 1. The UI collects `StateFlow` from the `ViewModel`.
 2. The `ViewModel` coordinates use cases and maps domain models into display models.
 3. The domain layer defines business models, repositories, and use cases.
-4. The data layer handles local and remote data sources plus repository implementations.
-5. Room acts as the local source of truth, while Retrofit refreshes the cache when necessary.
+4. The data layer defines repository implementations and datasource contracts.
+5. Infrastructure modules implement those contracts for Room, Retrofit, and DataStore.
+6. Room acts as the local source of truth, while Retrofit refreshes the cache when necessary.
 
 ## Modules
 
@@ -67,9 +68,8 @@ Android-specific layer containing:
 - Activities and Fragments
 - ViewModels
 - UI display models and mappers
-- Room database implementation
-- Retrofit services
-- Hilt modules
+- application startup and navigation
+- Hilt entry point and app-level composition
 
 ### `:domain`
 
@@ -84,8 +84,31 @@ Pure business layer containing:
 Implementation layer containing:
 - repository implementations
 - datasource contracts
-- data mappers
-- data-specific models
+- repository Hilt bindings
+
+### `:core:network`
+
+Infrastructure module containing:
+- Retrofit services
+- network datasource implementation
+- OkHttp interceptors
+- network-specific mappers
+- Hilt bindings for remote datasource
+
+### `:core:database`
+
+Infrastructure module containing:
+- Room database and DAO
+- local datasource implementation
+- entity mappers
+- Hilt bindings for local character datasource
+
+### `:core:datastore`
+
+Infrastructure module containing:
+- DataStore preferences implementation
+- theme persistence mapping
+- Hilt bindings for local configuration datasource
 
 ## Tech Stack
 
@@ -125,6 +148,51 @@ Implementation layer containing:
 - favorites are stored locally in Room
 - the favorites screen observes `Flow<List<...>>`
 - removing a favorite updates the database and the screen reacts without manual reloads
+
+## Module Dependency Direction
+
+The project is organized so dependency direction stays consistent:
+
+- `:app` depends on `:domain`, `:data`, and the `:core:*` modules as the Hilt composition root
+- `:data` depends on `:domain`
+- `:core:network` depends on `:data` and `:domain`
+- `:core:database` depends on `:data` and `:domain`
+- `:core:datastore` depends on `:data` and `:domain`
+
+This means datasource contracts live in `:data`, while concrete implementations live in the corresponding `:core:*` modules.
+
+```text
+                +------------------+
+                |       :app       |
+                | UI + Hilt root   |
+                +---------+--------+
+                          |
+          +---------------+---------------+
+          |                               |
+          v                               v
+   +-------------+                +---------------+
+   |   :domain   |                |     :data     |
+   | use cases   |<---------------| repos + ports |
+   | models      |                +-------+-------+
+   +-------------+                        |
+                                          |
+                    +---------------------+---------------------+
+                    |                     |                     |
+                    v                     v                     v
+          +----------------+    +----------------+    +-----------------+
+          | :core:network  |    | :core:database |    | :core:datastore |
+          | Retrofit/OkHttp|    | Room           |    | DataStore       |
+          +----------------+    +----------------+    +-----------------+
+```
+
+## Package Shape
+
+- `app/src/main/java/.../ui`: screens, adapters, UI mappers, ViewModels
+- `domain/src/main/java/...`: models, repository interfaces, use cases, failures
+- `data/src/main/java/.../datasource`: datasource contracts
+- `data/src/main/java/.../repository`: repository implementations
+- `core/*/src/main/java/.../di`: Hilt modules and bindings
+- `core/*/src/main/java/.../datasource`: concrete datasource implementations
 
 ## Project Setup
 
