@@ -1,0 +1,21 @@
+{
+  "status_code": 1,
+  "error": "OK",
+  "limit": 1,
+  "offset": 0,
+  "number_of_total_results": 1,
+  "number_of_page_results": 1,
+  "results": {
+    "id": 7,
+    "name": "Batman",
+    "deck": "Dark Knight",
+    "description": "<p>Protector <b>of</b> Gotham.</p>",
+    "site_detail_url": null,
+    "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-1699/",
+    "image": {
+      "original_url": "https://example.com/batman-original.png",
+      "medium_url": "https://example.com/batman-medium.png",
+      "icon_url": "https://example.com/batman-icon.png"
+    }
+  }
+}

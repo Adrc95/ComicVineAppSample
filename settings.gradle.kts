@@ -20,6 +20,7 @@ rootProject.name = "ComicVineAppSample"
 include(
     ":app",
     ":domain",
+    ":testing",
     ":data",
     ":core:database",
     ":core:network",

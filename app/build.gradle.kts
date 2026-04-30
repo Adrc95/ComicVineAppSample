@@ -27,7 +27,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.adrc95.comicvineappsample.HiltTestRunner"
     }
 
     buildTypes {
@@ -81,6 +81,19 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     testImplementation(libs.junit4)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(project(":testing"))
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.google.hilt.testing)
+    androidTestImplementation(libs.mockwebserver)
+    androidTestImplementation(libs.androidx.room.runtime)
+    androidTestImplementation(libs.androidx.datastore.preferences)
+    androidTestImplementation(libs.kotlin.coroutines.test)
+    androidTestImplementation(libs.kotlinx.serialization.json)
+    androidTestImplementation(libs.squareup.retrofit)
+    androidTestImplementation(libs.squareup.retrofit.kotlinx.serialization)
+    androidTestImplementation(libs.squareup.okhttp.logging)
+    kspAndroidTest(libs.google.hilt.compiler)
 }

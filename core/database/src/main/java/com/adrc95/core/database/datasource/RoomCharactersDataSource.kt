@@ -36,10 +36,12 @@ class RoomCharactersDataSource @Inject constructor(
 
     override suspend fun saveCharacter(character: Character): Either<Failure, Unit> = tryCall {
         dao.insert(character.toEntity())
+        Unit
     }
 
     override suspend fun saveCharacters(characters: List<Character>): Either<Failure, Unit> = tryCall {
         dao.insertAll(characters.map { it.toEntity() })
+        Unit
     }
 
     override suspend fun updateFavoriteCharacter(id: Long, favorite: Boolean): Either<Failure, Unit> = tryCall {
@@ -47,5 +49,6 @@ class RoomCharactersDataSource @Inject constructor(
         if (updatedRows == 0) {
             throw NoSuchElementException("Character with id $id not found")
         }
+        Unit
     }
 }

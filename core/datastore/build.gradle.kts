@@ -27,4 +27,7 @@ dependencies {
     ksp(libs.google.hilt.compiler)
     implementation(project(":data"))
     implementation(project(":domain"))
+
+    testImplementation(libs.junit4)
+    testImplementation(libs.kotlin.coroutines.test)
 }

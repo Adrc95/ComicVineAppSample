@@ -46,6 +46,7 @@ class CharactersRepositoryImpl @Inject constructor(
                         remoteCharacter.copy(
                             favorite = cachedCharacter?.favorite ?: remoteCharacter.favorite,
                             longDescription = cachedCharacter?.longDescription
+                                ?: remoteCharacter.longDescription
                         )
                     }
                     localCharactersDataSource.saveCharacters(mergedCharacters)

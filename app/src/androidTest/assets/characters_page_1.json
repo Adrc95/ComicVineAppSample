@@ -1,0 +1,23 @@
+{
+  "status_code": 1,
+  "error": "OK",
+  "limit": 20,
+  "offset": 0,
+  "number_of_total_results": 1,
+  "number_of_page_results": 1,
+  "results": [
+    {
+      "id": 1,
+      "name": "Spider-Man",
+      "deck": "Friendly neighborhood hero.",
+      "description": "<p>Detailed text for list mapping</p>",
+      "site_detail_url": "https://comicvine.gamespot.com/spider-man/4005-1443/",
+      "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-1443/",
+      "image": {
+        "original_url": "https://example.com/spiderman-original.png",
+        "medium_url": "https://example.com/spiderman-medium.png",
+        "icon_url": "https://example.com/spiderman-icon.png"
+      }
+    }
+  ]
+}
