@@ -19,6 +19,7 @@ The codebase is organized as a multi-module project and follows a clean separati
 - Modules
 - Tech Stack
 - Data Flow
+- Testing
 - Project Setup
 - Quality Checks
 
@@ -110,6 +111,13 @@ Infrastructure module containing:
 - theme persistence mapping
 - Hilt bindings for local configuration datasource
 
+### `:testing`
+
+Shared test support module containing:
+- test builders for domain and fixture models
+- fake repository implementations for unit tests
+- reusable helpers consumed by feature and core module tests
+
 ## Tech Stack
 
 - `Kotlin`
@@ -127,6 +135,9 @@ Infrastructure module containing:
 - `Lottie`
 - `SwipeRevealLayout`
 - `Detekt`
+- `JUnit4`
+- `AndroidX Test`
+- `MockWebServer`
 
 ## Data Flow
 
@@ -188,11 +199,60 @@ This means datasource contracts live in `:data`, while concrete implementations 
 ## Package Shape
 
 - `app/src/main/java/.../ui`: screens, adapters, UI mappers, ViewModels
+- `app/src/test/java/...`: app unit tests
+- `app/src/androidTest/java/...`: repository integration tests and test DI
 - `domain/src/main/java/...`: models, repository interfaces, use cases, failures
+- `domain/src/test/java/...`: use case unit tests
 - `data/src/main/java/.../datasource`: datasource contracts
 - `data/src/main/java/.../repository`: repository implementations
 - `core/*/src/main/java/.../di`: Hilt modules and bindings
 - `core/*/src/main/java/.../datasource`: concrete datasource implementations
+- `core/*/src/test/java/...`: core unit tests
+- `core/*/src/androidTest/java/...`: Android integration tests where framework components are required
+- `testing/src/main/java/...`: shared builders and fake repositories
+
+## Testing
+
+The project now includes both unit and integration coverage across modules.
+
+### Unit tests
+
+- `:domain` covers use cases
+- `:app` covers ViewModels and UI mappers
+- `:core:network` covers response mapping and remote datasource behavior
+- `:core:database` covers entity mapping and database utility wrappers
+- `:core:datastore` covers preference mapping and local configuration persistence
+
+Run all JVM unit tests with:
+
+```bash
+./gradlew test
+```
+
+Run a specific module, for example:
+
+```bash
+./gradlew :app:testDebugUnitTest
+./gradlew :domain:test
+./gradlew :core:network:testDebugUnitTest
+```
+
+### Integration tests
+
+- `:app:androidTest` verifies repository behavior end to end with Hilt test modules, in-memory Room, test DataStore, and MockWebServer
+- `:core:database:androidTest` verifies DAO behavior against a real Room database
+
+Run integration tests with:
+
+```bash
+./gradlew :app:connectedDebugAndroidTest
+./gradlew :core:database:connectedDebugAndroidTest
+```
+
+### Test support
+
+- network fixtures live under `app/src/androidTest/assets` and `core/network/src/test/resources`
+- the `:testing` module centralizes builders and fake repositories to keep tests consistent and reduce duplication
 
 ## Project Setup
 
@@ -231,4 +291,11 @@ Run Detekt:
 ./gradlew detekt
 ```
 
-The project currently compiles and passes Detekt with the checked-in changes.
+Common local verification commands:
+
+```bash
+./gradlew test
+./gradlew :app:connectedDebugAndroidTest
+./gradlew :core:database:connectedDebugAndroidTest
+./gradlew detekt
+```
